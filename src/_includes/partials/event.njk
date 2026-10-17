@@ -1,0 +1,16 @@
+{# Expects `e` (an event) and optional `isPast` #}
+<article class="event{% if isPast %} past{% endif %}">
+  <div class="date"><b>{{ e.data.start | day }}</b><span>{{ e.data.start | mon }}</span></div>
+  <div class="info">
+    <h3 class="title">{{ e.data.title }}</h3>
+    <p class="muted" style="font-size:15px">{{ e.data.start | longDate }}{% if e.data.time %} · {{ e.data.time }}{% endif %}{% if e.data.venue %} · {{ e.data.venue }}{% endif %}</p>
+    {% if e.data.summary and showSummary %}<p class="muted" style="font-size:15px;margin-top:6px">{{ e.data.summary }}</p>{% endif %}
+  </div>
+  {% if not isPast %}
+    {% if e.data.registerLink %}
+    <a class="btn btn-coral" href="{{ e.data.registerLink }}" rel="noopener">Register</a>
+    {% else %}
+    <a class="btn btn-coral" href="{{ ('Hello Balm, I would like to register for: ' + e.data.title) | wa(site.whatsapp) }}">Register</a>
+    {% endif %}
+  {% endif %}
+</article>

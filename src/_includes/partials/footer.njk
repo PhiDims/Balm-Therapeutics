@@ -1,0 +1,57 @@
+{% import "macros.njk" as m %}
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="crisis" role="note">
+      {{ m.icon("alert", 24, "#FF9966") | safe }}
+      <p><strong>In an emergency:</strong> {{ site.emergency }}</p>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span><img src="/assets/img/balm-mark.png" alt="" width="40" height="39"></span><span>Balm</span></div>
+        <p>{{ site.name }}. Psychologists and therapists in {{ site.city }}.</p>
+        <p class="tag">{{ site.tagline }}</p>
+      </div>
+      <nav aria-labelledby="f-services">
+        <h2 id="f-services">Services</h2>
+        <ul>
+          {% for s in collections.services %}<li><a href="{{ s.url }}">{{ s.data.title }}</a></li>{% endfor %}
+        </ul>
+      </nav>
+      <nav aria-labelledby="f-balm">
+        <h2 id="f-balm">Balm</h2>
+        <ul>
+          <li><a href="/about/">About and team</a></li>
+          <li><a href="/what-to-expect/">What to expect</a></li>
+          <li><a href="/events/">Events</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/about/#kind-words">Kind words</a></li>
+          <li><a href="/privacy/">Privacy and confidentiality</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="tel:{{ site.phoneLink }}">{{ site.phoneDisplay }}</a></li>
+          <li><a href="{{ m.waLink(site) }}">WhatsApp us</a></li>
+          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          <li>{{ site.address }}, Jos</li>
+          <li>{{ site.hoursShort }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>What you share with us is confidential, within the limits explained on our <a href="/privacy/">privacy page</a>.</span>
+      <span>© {{ "" | year }} {{ site.name }}</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="{{ m.waLink(site, whatsapp) }}" aria-label="Message Balm on WhatsApp">{{ m.icon("whatsapp", 30) | safe }}</a>
+<div class="action-bar">
+  <a class="btn btn-primary" href="{{ m.waLink(site, whatsapp) }}">{{ m.icon("whatsapp", 20) | safe }} WhatsApp</a>
+  {% if actionBarSecond == "enquire" %}
+  <a class="btn btn-coral" href="#enquire">Enquire</a>
+  {% else %}
+  <a class="btn btn-coral" href="tel:{{ site.phoneLink }}">{{ m.icon("phone", 20) | safe }} Call</a>
+  {% endif %}
+</div>

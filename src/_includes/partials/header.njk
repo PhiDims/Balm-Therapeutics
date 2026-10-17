@@ -1,0 +1,80 @@
+{% import "macros.njk" as m %}
+<div class="topstrip">
+  <div class="wrap">
+    <span class="strip-hours">{{ site.hoursShort }} · {{ site.city }}</span>
+    <span class="links">
+      <a href="tel:{{ site.phoneLink }}">{{ site.phoneDisplay }}</a>
+      <a class="email" href="mailto:{{ site.email }}">{{ site.email }}</a>
+    </span>
+  </div>
+</div>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="{{ site.name }}, home"><img src="/assets/img/balm-logo.png" alt="{{ site.name }}" width="190" height="53"></a>
+    <nav class="nav" aria-label="Main">
+      <details class="dropdown{% if navSection == 'services' %} is-current{% endif %}">
+        <summary>Services {{ m.icon("chevron", 16, "currentColor", 2.4) | safe }}</summary>
+        <div class="dropdown-panel">
+          <div>
+            <p class="group-label">For you and your family</p>
+            <div class="links">
+              {% for s in collections.services %}{% if s.data.group == "family" %}
+              <a href="{{ s.url }}">{{ s.data.title }}<span>{{ s.data.menuLine }}</span></a>
+              {% endif %}{% endfor %}
+            </div>
+          </div>
+          <div class="org">
+            <p class="group-label">For organisations</p>
+            <div class="links">
+              {% for s in collections.services %}{% if s.data.group == "org" %}
+              <a href="{{ s.url }}">{{ s.data.title }}<span>{{ s.data.menuLine }}</span></a>
+              {% endif %}{% endfor %}
+            </div>
+            <div class="all">
+              <a href="/services/">All services →</a>
+              <a href="/services/#finder">Not sure? Find the right support →</a>
+            </div>
+          </div>
+        </div>
+      </details>
+      <a href="/about/"{% if navSection == 'about' %} aria-current="page"{% endif %}>About</a>
+      <a href="/what-to-expect/"{% if navSection == 'expect' %} aria-current="page"{% endif %}>What to expect</a>
+      <a href="/events/"{% if navSection == 'events' %} aria-current="page"{% endif %}>Events</a>
+      <a href="/blog/"{% if navSection == 'blog' %} aria-current="page"{% endif %}>Blog</a>
+      <a href="/contact/"{% if navSection == 'contact' %} aria-current="page"{% endif %}>Contact</a>
+      <a class="btn btn-coral" href="/contact/#forms">Book now</a>
+    </nav>
+    <div class="header-actions menu-only">
+      <a class="btn btn-coral" href="/contact/#forms">Book</a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false" data-menu-open>{{ m.icon("menu", 22, "#12302C") | safe }}</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="bar">
+    <img src="/assets/img/balm-logo.png" alt="{{ site.name }}" width="143" height="40" style="height:40px;width:auto">
+    <button class="menu-toggle" type="button" aria-label="Close menu" data-menu-close>{{ m.icon("close", 22, "#12302C") | safe }}</button>
+  </div>
+  <nav aria-label="Mobile">
+    <details>
+      <summary>Services {{ m.icon("chevron", 20, "#0E6B62", 2.4) | safe }}</summary>
+      <div class="sub">
+        {% for s in collections.services %}<a href="{{ s.url }}">{{ s.data.title }}</a>{% endfor %}
+        <a class="all" href="/services/">All services →</a>
+      </div>
+    </details>
+    <a href="/about/">About</a>
+    <a href="/what-to-expect/">What to expect</a>
+    <a href="/events/">Events</a>
+    <a href="/blog/">Blog</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+  <div class="foot">
+    <div class="btn-row" style="display:grid;grid-template-columns:1fr 1fr">
+      <a class="btn btn-primary" href="{{ m.waLink(site) }}">WhatsApp</a>
+      <a class="btn btn-coral" href="tel:{{ site.phoneLink }}">Call</a>
+    </div>
+    <p>In an emergency, call 112 or go to the nearest hospital.</p>
+  </div>
+</div>

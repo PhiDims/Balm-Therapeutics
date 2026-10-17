@@ -1,0 +1,33 @@
+{# Appointment request. Asks for contact details only, never clinical information. #}
+<form class="form {{ formClass }}" data-web3forms data-ok="Thank you. We'll call you back {{ site.replyTime }}. If it's urgent, please message us on WhatsApp." novalidate>
+  <input type="hidden" name="access_key" value="{{ site.web3formsKey }}">
+  <input type="hidden" name="subject" value="New appointment request from the website">
+  <input type="hidden" name="from_name" value="Balm website">
+  <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off">
+  <label>Your name<input type="text" name="name" autocomplete="name" required></label>
+  <label>Phone (WhatsApp is fine)<input type="tel" name="phone" autocomplete="tel" required></label>
+  <label>Who is the help for?
+    <select name="for">
+      <option>Myself</option><option>My child or teenager</option><option>My relationship</option><option>Someone else in my family</option>
+    </select>
+  </label>
+  <label>Service, if you know
+    <select name="service">
+      <option>Not sure yet</option>
+      {% for s in collections.services %}{% if s.data.group == "family" %}<option{% if preselect == s.fileSlug %} selected{% endif %}>{{ s.data.title }}</option>{% endif %}{% endfor %}
+    </select>
+  </label>
+  <fieldset>
+    <legend>In person or online?</legend>
+    <div class="choices">
+      <label class="check"><input type="radio" name="mode" value="In person">In person</label>
+      <label class="check"><input type="radio" name="mode" value="Online">Online</label>
+      <label class="check"><input type="radio" name="mode" value="Either" checked>Either</label>
+    </div>
+  </fieldset>
+  <label>Best day and time to call<input type="text" name="best_time" placeholder="e.g. Tuesday afternoon"></label>
+  <p class="hint full">Please don't include medical or personal details here. We'll talk about what's going on when we speak.</p>
+  <label class="check full"><input type="checkbox" name="consent" value="Yes" required>It's okay to contact me on this number, including by WhatsApp.</label>
+  <button class="btn btn-primary full" type="submit">Request a call back</button>
+  <p class="status full" role="status" tabindex="-1"></p>
+</form>

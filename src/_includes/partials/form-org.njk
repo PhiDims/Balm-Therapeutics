@@ -1,0 +1,38 @@
+{# Training and consultation enquiry for organisations. #}
+<form class="form {{ formClass }}" data-web3forms data-ok="Thank you. We'll reply {{ site.replyTime }} with questions or a proposal." novalidate>
+  <input type="hidden" name="access_key" value="{{ site.web3formsKey }}">
+  <input type="hidden" name="subject" value="New organisation enquiry from the website">
+  <input type="hidden" name="from_name" value="Balm website">
+  <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off">
+  <label>Organisation<input type="text" name="organisation" autocomplete="organization" required></label>
+  <label>Your name and role<input type="text" name="name" required></label>
+  <label>Phone or WhatsApp<input type="tel" name="phone" autocomplete="tel" required></label>
+  <label>Email<input type="email" name="email" autocomplete="email"></label>
+  <label>What do you need?
+    <select name="need">
+      <option{% if preselect == "training" %} selected{% endif %}>Training</option>
+      <option{% if preselect == "consultation" %} selected{% endif %}>Consultation</option>
+      <option>Crisis support</option><option>Research partnership</option><option>Speaking at an event</option><option>Something else</option>
+    </select>
+  </label>
+  <label>Type of group
+    <select name="group">
+      <option>School</option><option>Parents and caregivers</option><option>Church or faith community</option><option>NGO or humanitarian agency</option><option>Company or organisation</option><option>Community</option><option>Other</option>
+    </select>
+  </label>
+  {% if showTopics %}
+  <fieldset class="full">
+    <legend>Topics you're interested in</legend>
+    <div class="choices grid-choices">
+      {% for t in ["Trauma-informed care", "Mental health literacy", "Emotional first aid", "Safeguarding", "Stress and burnout", "Psychosocial support", "Not sure yet"] %}
+      <label class="check"><input type="checkbox" name="topics[]" value="{{ t }}">{{ t }}</label>
+      {% endfor %}
+    </div>
+  </fieldset>
+  {% endif %}
+  <label>Number of people<input type="number" name="size" min="1" inputmode="numeric"></label>
+  <label>Preferred dates<input type="text" name="dates" placeholder="e.g. late January"></label>
+  <label class="full">Tell us a little more<textarea name="notes" rows="4"></textarea></label>
+  <button class="btn btn-primary full" type="submit">Send enquiry</button>
+  <p class="status full" role="status" tabindex="-1"></p>
+</form>

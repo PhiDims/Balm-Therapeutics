@@ -1,0 +1,8 @@
+{
+  "note": "Only publish testimonials with written consent on file. Use first names or initials.",
+  "items": [
+    { "quote": "[Testimonial, used only with written consent on file]", "name": "[First name or initials]", "context": "[Service or training attended]" },
+    { "quote": "[Testimonial from a training participant or partner organisation]", "name": "[Name]", "context": "[Organisation]" },
+    { "quote": "[Testimonial, used only with written consent on file]", "name": "[First name or initials]", "context": "[Service]" }
+  ]
+}

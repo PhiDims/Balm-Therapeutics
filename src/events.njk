@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+title: Events
+permalink: /events/
+navSection: events
+description: Upcoming workshops, trainings and talks from Balm Therapeutic Services in Jos and online.
+---
+{% import "macros.njk" as m %}
+{% set upcomingEvents = collections.events | upcoming %}
+{% set pastEvents = collections.events | past %}
+
+<section class="hero tone-sand section" style="padding-top: clamp(20px, 3vw, 28px)">
+  {{ m.squiggle("right: -80px; top: -30px; width: 560px; height: 280px", "#FFDCC8") | safe }}
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Events</span></nav>
+    <h1 style="margin-bottom:16px">Events</h1>
+    <p class="lead">Workshops, trainings and talks for parents, teachers, churches and anyone who wants to understand mental health better.</p>
+  </div>
+</section>
+
+<section class="section tone-white">
+  <div class="wrap">
+    <div class="section-head"><h2>Upcoming</h2></div>
+    <div class="stack" style="max-width:860px">
+      {% set showSummary = true %}{% set isPast = false %}
+      {% for e in upcomingEvents %}
+        {% include "partials/event.njk" %}
+      {% else %}
+        <p class="muted">No events are scheduled right now. Follow us on WhatsApp or check back soon.</p>
+      {% endfor %}
+    </div>
+    <p class="muted" style="margin-top:24px;font-size:15px">Want us to run a session for your school, church or organisation? <a href="/services/training/">See our training</a>.</p>
+  </div>
+</section>
+
+{% if pastEvents.length %}
+<section class="section tone-mint">
+  <div class="wrap">
+    <div class="section-head"><h2>Past events</h2></div>
+    <div class="stack" style="max-width:860px">
+      {% set isPast = true %}{% set showSummary = true %}
+      {% for e in pastEvents | limit(12) %}{% include "partials/event.njk" %}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

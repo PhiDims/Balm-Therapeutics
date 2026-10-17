@@ -1,0 +1,6 @@
+{
+  "layout": "layouts/service.njk",
+  "tags": [],
+  "permalink": "/services/{{ page.fileSlug }}/",
+  "navSection": "services"
+}

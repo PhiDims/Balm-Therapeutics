@@ -1,0 +1,25 @@
+{
+  "name": "Balm Therapeutic Services",
+  "shortName": "Balm",
+  "tagline": "Heal. Grow. Thrive.",
+  "url": "https://balmtherapeutics.com.ng",
+  "description": "Psychologists and therapists in Jos, Nigeria. Therapy, play therapy, couples counselling, trauma care, assessments and training, in person or online.",
+  "phoneDisplay": "+234 814 019 6264",
+  "phoneLink": "+2348140196264",
+  "whatsapp": "2348140196264",
+  "whatsappMessage": "Hello Balm, I'd like to book a first appointment",
+  "email": "hello@balmtherapeutics.com.ng",
+  "address": "[Street address, to confirm]",
+  "landmark": "[Landmark, to confirm]",
+  "city": "Jos, Plateau State",
+  "mapLink": "https://maps.google.com/?q=Jos+Plateau+State",
+  "hours": [
+    { "days": "Monday to Friday", "time": "9am to 4:30pm" },
+    { "days": "Saturday", "time": "9am to 2pm" },
+    { "days": "Sunday", "time": "Closed" }
+  ],
+  "hoursShort": "Mon to Fri 9am to 4:30pm · Sat 9am to 2pm",
+  "replyTime": "within one working day",
+  "web3formsKey": "YOUR-WEB3FORMS-ACCESS-KEY",
+  "emergency": "If you or someone else is in immediate danger, call 112 or go to the nearest hospital. This website and our WhatsApp line are not monitored for emergencies."
+}

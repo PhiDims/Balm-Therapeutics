@@ -1,0 +1,204 @@
+---
+layout: layouts/base.njk
+title: Home
+description: Whatever you're carrying, you don't have to carry it alone. Psychologists and therapists in Jos for children, teenagers, adults, couples and families, in person or online.
+---
+{% import "macros.njk" as m %}
+
+<!-- 1. Welcome -->
+<section class="hero tone-white section">
+  {{ m.squiggle("left: -80px; bottom: -110px; width: 520px; height: 260px") | safe }}
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="text">
+        <p class="eyebrow" style="letter-spacing:0.18em">{{ site.tagline }}</p>
+        <h1>Whatever you're carrying, you don't have to carry it alone.</h1>
+        <p class="lead">We're a team of psychologists and therapists in Jos. We see children, teenagers, adults, couples and families, at our clinic or online.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="{{ m.waLink(site) }}">{{ m.icon("whatsapp", 22) | safe }} Book on WhatsApp</a>
+          <a class="btn btn-outline" href="/services/#finder">Find the right support {{ m.icon("arrow", 18, "currentColor", 2.2) | safe }}</a>
+        </div>
+        <div class="trust">
+          <span>{{ m.icon("lock", 18, "#0E6B62") | safe }} Everything you share is confidential</span>
+          <span>{{ m.icon("pin", 18, "#0E6B62") | safe }} In person in Jos, or online</span>
+        </div>
+      </div>
+      <div class="media">
+        <img class="hero-mark" src="/assets/img/balm-mark.png" alt="" width="400" height="390">
+        {{ m.photo("Real photo of the therapy room or team, in black and white", "", "", "ph-float") | safe }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Who are you looking for help for? -->
+<section class="section tone-mint" id="who">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Who are you looking for help for?</h2>
+      <p class="lead">Start here. You don't need to know the clinical name for what's going on.</p>
+    </div>
+    <div class="grid for-cards" style="--min: 240px">
+      <a class="card" href="/services/individual-therapy/">
+        <span class="icon-tile">{{ m.icon("person", 28, "#0E6B62", 1.8) | safe }}</span>
+        <h3>For myself</h3>
+        <p>Anxiety, low mood, trauma, grief, stress, or a season that feels too heavy.</p>
+        <span class="go">See how we can help →</span>
+      </a>
+      <a class="card" href="/services/child-play-therapy/">
+        <span class="icon-tile peach">{{ m.icon("child", 28, "#B4521F", 1.8) | safe }}</span>
+        <h3>For my child or teenager</h3>
+        <p>Worries about feelings, behaviour or learning, or something they've been through.</p>
+        <span class="go">See how we can help →</span>
+      </a>
+      <a class="card" href="/services/couples-counselling/">
+        <span class="icon-tile">{{ m.icon("heart", 28, "#0E6B62", 1.8) | safe }}</span>
+        <h3>For my relationship</h3>
+        <p>Getting ready for marriage, or working through conflict and distance together.</p>
+        <span class="go">See how we can help →</span>
+      </a>
+      <a class="card" href="/services/training/">
+        <span class="icon-tile peach">{{ m.icon("building", 28, "#B4521F", 1.8) | safe }}</span>
+        <h3>For my school, church or organisation</h3>
+        <p>Training, workshops and consultation for your staff, volunteers or community.</p>
+        <span class="go">See how we can help →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. How we help -->
+<section class="section tone-white" id="services">
+  {{ m.squiggle("right: -120px; top: -60px; width: 420px; height: 420px", "#D3EEEA", "b") | safe }}
+  <div class="wrap">
+    <div class="section-head split">
+      <div><p class="eyebrow">How we help</p><h2>{{ collections.services.length }} ways we support people in Jos and beyond</h2></div>
+      <a class="more" href="/services/">See all services →</a>
+    </div>
+    <div class="grid" style="--min: 250px">
+      {% for s in collections.services %}
+      <a class="card {{ 'peach' if s.data.featured else 'bordered' }}" href="{{ s.url }}"><h3 style="font-size:21px">{{ s.data.title }}</h3><p>{{ s.data.card }}</p></a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 4. Your first visit -->
+<section class="section tone-teal" id="first-visit">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">What to expect</p><h2>Your first visit, step by step</h2></div>
+    <ol class="steps">
+      <li><span class="num" aria-hidden="true">1</span><h3>Reach out</h3><p>Send a WhatsApp message, call us, or fill in the short form. You don't have to explain everything yet.</p></li>
+      <li><span class="num" aria-hidden="true">2</span><h3>A short first conversation</h3><p>We ask a few gentle questions to understand what you need and which member of our team fits best.</p></li>
+      <li><span class="num" aria-hidden="true">3</span><h3>Your first session</h3><p>You meet your therapist, in person or online, and together you decide how to go on from there.</p></li>
+    </ol>
+    <div style="margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.2);display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between">
+      <p style="display:flex;gap:10px;align-items:center">{{ m.icon("lock", 22, "#FFC9AB") | safe }} Everything you share with us stays confidential.</p>
+      <a href="/what-to-expect/" style="color:#fff;font-weight:600">Read our FAQs on fees, privacy and online sessions →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Play therapy spotlight -->
+<section class="section tone-coral" id="play-therapy">
+  {{ m.squiggle("right: -40px; bottom: -30px; width: 520px; height: 300px", "#FFB48C") | safe }}
+  <div class="wrap hero-grid">
+    <div class="media" style="order:0">{{ m.photo("Real photo of the play room: toys, sand tray, art corner. No children in shot.", "", "", "ph-photo ph-dashed") | safe }}</div>
+    <div class="text">
+      <p class="eyebrow" style="color:#12302C">For parents</p>
+      <h2 style="margin-bottom:20px">Children often say with toys what they can't yet say in words.</h2>
+      <p style="font-size:18px;margin-bottom:22px">In play therapy, a trained therapist follows your child's lead in a room full of carefully chosen toys. It helps children who have lived through something frightening, or whose feelings are coming out as behaviour. Balm is one of the few places in Jos that offers it.</p>
+      <p style="font-weight:600;margin-bottom:10px">Your child might benefit if they:</p>
+      <ul style="padding-left:22px;margin-bottom:28px;display:flex;flex-direction:column;gap:6px">
+        <li>have become withdrawn, clingy or easily upset</li>
+        <li>struggle with sleep or have nightmares</li>
+        <li>are acting out at home or in school</li>
+        <li>have been through loss, violence or a big change, like moving home</li>
+      </ul>
+      <a class="btn btn-dark" href="/services/child-play-therapy/">Learn about play therapy {{ m.icon("arrow", 18, "currentColor", 2.2) | safe }}</a>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Meet the team -->
+<section class="section tone-white" id="team">
+  <div class="wrap">
+    <div class="section-head split">
+      <div>
+        <p class="eyebrow">Meet the team</p>
+        <h2>The people you'll meet</h2>
+        <p class="lead">A team of {{ collections.team.length }}, with training in trauma, child and adolescent mental health, special needs and rehabilitation.</p>
+      </div>
+      <a class="more" href="/about/#team">Meet all {{ collections.team.length }} →</a>
+    </div>
+    <div class="team-grid">
+      {% for p in collections.team | limit(4) %}
+      <div>
+        {{ m.portrait(p, loop.index0 % 2) | safe }}
+        <span class="name">{{ p.data.name }}</span>
+        <span class="role">{{ p.data.role }}</span>
+        <span class="focus">{{ p.data.focus }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 7. Kind words -->
+<section class="section tone-mint" id="kind-words">
+  <div class="wrap">
+    <div class="section-head"><h2>Kind words</h2></div>
+    <div class="grid" style="--min: 300px">
+      {% for t in testimonials.items | limit(3) %}
+      <figure class="quote">
+        <svg aria-hidden="true" width="34" height="26" viewBox="0 0 34 26" fill="{{ '#FF9966' if loop.index0 % 2 == 0 else '#1BA698' }}"><path d="M0 26V15C0 6 5 1 13 0l1 4c-5 1-7 4-7 9h6v13zm20 0V15c0-9 5-14 13-15l1 4c-5 1-7 4-7 9h6v13z"/></svg>
+        <blockquote>{{ t.quote }}</blockquote>
+        <figcaption>{{ t.name }}, {{ t.context }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 8 and 9. Events and blog -->
+<section class="section tone-white" id="events">
+  <div class="wrap two-col">
+    <div class="side" style="flex:1 1 400px">
+      <div class="section-head split" style="margin-bottom:24px">
+        <div><h2 style="font-size:clamp(26px,3vw,38px)">Upcoming events</h2></div>
+        <a class="more" href="/events/">All events →</a>
+      </div>
+      <div class="stack">
+        {% for e in collections.events | upcoming | limit(2) %}
+        {% include "partials/event.njk" %}
+        {% else %}
+        <p class="muted">No events scheduled right now. <a href="/events/">See past events</a>.</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="main" style="flex:1.3 1 460px">
+      <div class="section-head split" style="margin-bottom:24px">
+        <div><h2 style="font-size:clamp(26px,3vw,38px)">From the blog</h2></div>
+        <a class="more" href="/blog/">All articles →</a>
+      </div>
+      <div class="grid" style="--min: 190px">
+        {% for p in collections.posts | limit(3) %}{% include "partials/post-card.njk" %}{% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Reach out -->
+<section class="section tone-sand" id="contact">
+  <div class="wrap two-col">
+    <div class="side">
+      <h2>Reach out when you're ready</h2>
+      <p class="lead" style="margin:14px 0 32px">Message us on WhatsApp, give us a call, or leave your number and we'll call you back.</p>
+      {% include "partials/contact-details.njk" %}
+    </div>
+    <div class="main">
+      {% set formClass = "" %}
+      {% include "partials/form-booking.njk" %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,165 @@
+---
+layout: layouts/base.njk
+title: About Balm and our team
+permalink: /about/
+navSection: about
+description: Balm Therapeutic Services is a mental health and psychosocial support practice in Jos, founded by Clinical Psychologist Philip Dimka. Meet our team.
+---
+{% import "macros.njk" as m %}
+{% set founder = collections.team | first %}
+
+<section class="hero tone-white section" style="padding-top: clamp(20px, 3vw, 28px)">
+  {{ m.squiggle() | safe }}
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <span>About</span></nav>
+    <div class="hero-grid">
+      <div class="text">
+        <p class="eyebrow">About Balm</p>
+        <h1>A safe place to be seen, heard and restored</h1>
+        <p class="lead" style="margin-bottom:18px">{{ site.name }} is a mental health and psychosocial support practice in Jos. We work with children, teenagers, adults, couples and families, and with the schools, churches and organisations that care for them.</p>
+        <p class="muted" style="font-size:18px;max-width:34em">Our care is trauma-informed, grounded in clinical psychology, and shaped by the realities of life in Nigeria.</p>
+      </div>
+      <div class="media">
+        <img class="hero-mark" src="/assets/img/balm-mark.png" alt="" width="400" height="390">
+        {{ m.photo("Group photo of the team, black and white", "", "", "ph-float") | safe }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tone-teal center">
+  {{ m.squiggle("right: -100px; top: -100px; width: 440px; height: 440px", "#178074", "b") | safe }}
+  <div class="wrap" style="max-width:1000px">
+    <p class="eyebrow">Why we exist</p>
+    <p style="font-family:var(--serif);font-weight:600;font-size:clamp(28px,4vw,52px);line-height:1.15;margin-bottom:24px">We exist to bridge the mental health gap across northern Nigeria.</p>
+    <p class="lead" style="margin:0 auto;max-width:40em">We do it through accessible, high-quality therapy, assessment, training and community support. We believe healing is possible, growth is achievable, and every person deserves a safe space to be seen, heard and restored.</p>
+  </div>
+</section>
+
+<section class="section tone-white">
+  <div class="wrap grid" style="--min: 320px;gap:20px">
+    <div class="card" style="background:var(--sand);border-radius:28px;padding:32px;gap:12px">
+      <span class="eyebrow" style="color:var(--coral-deep);margin:0">Our story</span>
+      <h2 style="font-size:26px">Started in Jos, for Jos</h2>
+      <p>Philip Dimka founded Balm in [year] after years of trauma and psychosocial work across Plateau State. He saw how few places families could turn to for skilled, affordable mental health care. [Philip to add a sentence or two in his own words.]</p>
+    </div>
+    <div class="card mint" style="border-radius:28px;padding:32px;gap:12px">
+      <span class="eyebrow" style="margin:0">Our vision</span>
+      <h2 style="font-size:26px">Where we're heading</h2>
+      <p>To be a leading centre of excellence for mental health and psychosocial support in Nigeria, helping individuals, families and communities to thrive.</p>
+    </div>
+    <div class="card mint" style="border-radius:28px;padding:32px;gap:12px">
+      <span class="eyebrow" style="margin:0">Our mission</span>
+      <h2 style="font-size:26px">What we do each day</h2>
+      <p>To deliver accessible, evidence-based mental health care, build emotionally healthy families and communities, and strengthen resilience through therapy, assessment, training and partnership.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section tone-mint" id="approach">
+  <div class="wrap two-col">
+    <div class="side">
+      <p class="eyebrow">Our approach</p>
+      <h2>How we work</h2>
+      <p class="muted" style="margin:16px 0 28px">We take what works in mental health care worldwide and adapt it to the realities of Nigerian families and communities.</p>
+      <div class="stack" style="font-size:15.5px">
+        <p style="display:flex;gap:14px;align-items:baseline"><span style="font-family:var(--serif);font-weight:700;font-size:30px;color:var(--teal-deep)">Heal.</span><span class="muted">Safe, skilled care for what hurts.</span></p>
+        <p style="display:flex;gap:14px;align-items:baseline"><span style="font-family:var(--serif);font-weight:700;font-size:30px;color:var(--coral-deep)">Grow.</span><span class="muted">New skills, understanding and strength.</span></p>
+        <p style="display:flex;gap:14px;align-items:baseline"><span style="font-family:var(--serif);font-weight:700;font-size:30px">Thrive.</span><span class="muted">Lives, families and communities that flourish.</span></p>
+      </div>
+    </div>
+    <div class="main grid" style="--min: 240px;gap:14px">
+      <div class="card"><h3 style="font-size:19px">Trauma-informed</h3><p>We assume many people carry hard experiences, and we work at a pace that feels safe.</p></div>
+      <div class="card"><h3 style="font-size:19px">Evidence-based</h3><p>We use approaches with research behind them, such as CBT, EMDR and play therapy.</p></div>
+      <div class="card"><h3 style="font-size:19px">Strengths-based and whole-person</h3><p>We look at what's strong in you, as well as what's hard.</p></div>
+      <div class="card"><h3 style="font-size:19px">Culturally grounded</h3><p>Care that respects your language, family and community, and your faith where you want it included.</p></div>
+      <div class="card"><h3 style="font-size:19px">Collaborative</h3><p>We work alongside families, schools, doctors and partners, with your permission.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tone-white">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Who we serve</p><h2>People and organisations we work with</h2></div>
+    <ul class="grid" style="--min: 250px;list-style:none;padding:0;gap:12px">
+      {% for w in ["Individuals seeking emotional support", "Children, teenagers and adults", "Couples and families", "Communities affected by crisis", "Schools and institutions", "Churches and faith-based organisations", "NGOs and humanitarian agencies", "Companies caring for staff wellbeing"] %}
+      <li style="border:1px solid var(--mint-line);border-radius:18px;padding:16px 20px;display:flex;gap:12px;align-items:center"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:{{ '#1BA698' if loop.index0 % 2 == 0 else '#FF9966' }};flex:none"></span>{{ w }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section tone-sand" id="founder">
+  <div class="wrap hero-grid">
+    <div class="media" style="flex:0 1 380px;min-width:240px">
+      {{ m.portrait(founder, false, "portrait-large") | safe }}
+    </div>
+    <div class="text">
+      <p class="eyebrow" style="color:var(--coral-deep)">Meet our founder</p>
+      <h2 style="font-size:clamp(32px,3.6vw,46px);margin-bottom:6px">{{ founder.data.name }}</h2>
+      <p style="color:var(--teal-deep);font-weight:600;margin-bottom:22px">{{ founder.data.role }} · Clinical Psychologist, Trauma Therapist and Play Therapist</p>
+      <p class="muted" style="margin-bottom:16px">Philip has wide experience in individual therapy, trauma recovery, child and adolescent mental health, relationship work and humanitarian psychosocial support. His work covers research on adverse childhood experiences, trauma intervention, socio-emotional development and community resilience programmes.</p>
+      <p class="muted" style="margin-bottom:22px">He holds a BSc in General and Applied Psychology from the University of Jos and an MSc in Clinical Psychology. He is Vice President of the Association of Play Therapy Nigeria (APTN).</p>
+      <div class="chips">{% for c in ["Child-Centred Play Therapy", "Theraplay", "EMDR", "Trauma-informed care", "English and Hausa"] %}<span class="chip">{{ c }}</span>{% endfor %}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section tone-white" id="team">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Our team</p>
+      <h2>The people you'll meet</h2>
+      <p class="lead">A team of {{ collections.team.length }}, trained in trauma, child and adolescent mental health, special needs, rehabilitation, advocacy and design.</p>
+    </div>
+    <div class="pills scroll" role="group" aria-label="Filter the team by area" data-pick-group=".team-person" data-empty="#team-empty" style="margin-bottom:28px">
+      {% for f in [["all","Everyone"],["adults","Adults"],["children","Children"],["trauma","Trauma"],["couples","Couples"],["training","Training and outreach"]] %}
+      <button class="pill" type="button" data-pick="{{ f[0] }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ f[1] }}</button>
+      {% endfor %}
+    </div>
+    <div class="team-grid">
+      {% for p in collections.team %}
+      <div class="team-person" data-keys="{{ p.data.areas | areaKeys }}">
+        {{ m.portrait(p, loop.index0 % 2) | safe }}
+        <span class="name">{{ p.data.name }}</span>
+        <span class="role">{{ p.data.role }}</span>
+        <span class="focus">{{ p.data.focus }}</span>
+        {% if p.data.credentials %}<span class="focus" style="margin-top:4px">{{ p.data.credentials }}</span>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    <p id="team-empty" class="muted" hidden>No team members match this area yet.</p>
+  </div>
+</section>
+
+<section class="section tone-mint" id="kind-words">
+  <div class="wrap">
+    <div class="section-head"><h2>Kind words</h2><p class="muted">Shared with written permission. Names are shortened to protect privacy.</p></div>
+    <div class="grid" style="--min: 300px">
+      {% for t in testimonials.items %}
+      <figure class="quote"><blockquote>{{ t.quote }}</blockquote><figcaption>{{ t.name }}, {{ t.context }}</figcaption></figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="tone-sand" style="padding:44px 0">
+  <div class="wrap">
+    <p class="center muted" style="font-weight:600;margin-bottom:18px">Professional memberships and partners</p>
+    <div class="logo-strip">
+      {% for p in partners.memberships %}<div>{% if p.logo %}<img src="{{ p.logo }}" alt="{{ p.name }}" style="max-height:48px;width:auto">{% else %}{{ p.name }}{% endif %}</div>{% endfor %}
+      {% for i in range(3) %}<div class="empty">[Membership or partner]</div>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section tone-coral cta-band">
+  {{ m.squiggle("left: -60px; bottom: -60px; width: 520px; height: 260px", "#FFB48C") | safe }}
+  <div class="wrap">
+    <div><h2>Ready to talk to someone?</h2><p style="font-size:18px">Send us a message. We'll help you find the right person on our team.</p></div>
+    <div class="btn-row">
+      <a class="btn btn-dark" href="{{ m.waLink(site) }}">{{ m.icon("whatsapp", 22) | safe }} Message us on WhatsApp</a>
+      <a class="btn btn-white" href="/contact/">Contact us</a>
+    </div>
+  </div>
+</section>

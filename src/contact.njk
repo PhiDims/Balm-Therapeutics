@@ -1,0 +1,105 @@
+---
+layout: layouts/base.njk
+title: Contact and booking
+permalink: /contact/
+navSection: contact
+description: Book an appointment with Balm Therapeutic Services in Jos by WhatsApp, phone or email, or send a training or consultation enquiry.
+---
+{% import "macros.njk" as m %}
+
+<section class="hero tone-mint section" style="padding-top: clamp(20px, 3vw, 28px)">
+  {{ m.squiggle("right: -80px; bottom: -40px; width: 560px; height: 280px", "#C7E7E2") | safe }}
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Contact</span></nav>
+    <h1 style="margin-bottom:16px;max-width:14em">Reach out when you're ready</h1>
+    <p class="lead" style="margin-bottom:40px">Choose whichever feels easiest. You don't need to explain everything in your first message.</p>
+    <div class="ways">
+      <a class="primary" href="{{ m.waLink(site) }}">
+        {{ m.icon("whatsapp", 32, "currentColor", 1.8) | safe }}
+        <span class="t">WhatsApp</span>
+        <span class="d">The quickest way. A message is ready to send.</span>
+        <span class="v">{{ site.phoneDisplay }} →</span>
+      </a>
+      <a href="tel:{{ site.phoneLink }}">
+        {{ m.icon("phone", 32, "#0E6B62", 1.8) | safe }}
+        <span class="t">Call us</span>
+        <span class="d">During opening hours. If we miss you, we'll call back.</span>
+        <span class="v">{{ site.phoneDisplay }} →</span>
+      </a>
+      <a href="mailto:{{ site.email }}">
+        {{ m.icon("mail", 32, "#0E6B62", 1.8) | safe }}
+        <span class="t">Email</span>
+        <span class="d">Best for organisations, partners and documents.</span>
+        <span class="v">{{ site.email }} →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section tone-white" id="forms">
+  <span id="organisations"></span>
+  <div class="wrap two-col">
+    <div class="side">
+      <p class="eyebrow">Send us a request</p>
+      <h2>Prefer to write?</h2>
+      <p class="lead" style="margin:14px 0 24px">Leave a few details and we'll get back to you {{ site.replyTime }}.</p>
+      <div style="background:var(--mint);border-radius:20px;padding:20px 22px;display:flex;gap:14px;align-items:flex-start">
+        {{ m.icon("lock", 24, "#0E6B62") | safe }}
+        <p class="muted" style="font-size:15.5px"><strong style="color:var(--ink)">Your privacy matters.</strong> Please don't include medical or personal details here. Only our intake team sees these requests, and we talk about what's going on when we speak. <a href="/privacy/">Privacy and confidentiality</a></p>
+      </div>
+    </div>
+    <div class="main">
+      <div class="tabs" role="tablist" aria-label="Type of request">
+        <button class="tab" type="button" role="tab" id="tab-booking" aria-controls="panel-booking" aria-selected="true">Book an appointment</button>
+        <button class="tab" type="button" role="tab" id="tab-org" aria-controls="panel-org" aria-selected="false" tabindex="-1">Training or consultation</button>
+      </div>
+      <div id="panel-booking" role="tabpanel" aria-labelledby="tab-booking">
+        {% set formClass = "bordered" %}
+        {% include "partials/form-booking.njk" %}
+      </div>
+      <div id="panel-org" role="tabpanel" aria-labelledby="tab-org" hidden>
+        {% set formClass = "bordered" %}{% set showTopics = false %}
+        {% include "partials/form-org.njk" %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tone-sand" id="visit">
+  <div class="wrap two-col">
+    <div class="side">
+      <p class="eyebrow" style="color:var(--coral-deep)">Visit us</p>
+      <h2 style="margin-bottom:24px">Our office in Jos</h2>
+      <div class="info-list">
+        <div class="row"><span class="ic">{{ m.icon("pin", 22, "#0E6B62") | safe }}</span><div><div style="font-weight:600">Address</div><div class="muted">{{ site.address }}<br>{{ site.city }}</div><div class="muted" style="font-size:15px;margin-top:4px">{{ site.landmark }}</div></div></div>
+        <div class="row"><span class="ic">{{ m.icon("clock", 22, "#0E6B62") | safe }}</span><div style="flex:1"><div style="font-weight:600;margin-bottom:6px">Opening hours</div><dl class="hours">{% for h in site.hours %}<dt>{{ h.days }}</dt><dd>{{ h.time }}</dd>{% endfor %}</dl></div></div>
+        <div class="row"><span class="ic">{{ m.icon("person", 22, "#0E6B62") | safe }}</span><div><div style="font-weight:600">By appointment</div><div class="muted">Please book before you visit, so a therapist is free to see you.</div></div></div>
+      </div>
+      <a class="btn btn-outline" style="margin-top:28px" href="{{ site.mapLink }}" rel="noopener">{{ m.icon("map", 20) | safe }} Get directions in Google Maps</a>
+    </div>
+    <div class="main map">
+      {# Replace with the Google Maps embed for the office once the address is confirmed #}
+      <div class="ph" style="height:100%;min-height:400px;border-radius:0" role="img" aria-label="Map to come">{{ m.icon("map", 40, "currentColor", 1.6) | safe }}<span>Google Map of the office goes here once the address is confirmed</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tone-white">
+  <div class="wrap grid" style="--min: 340px;gap:20px">
+    <div class="card mint" style="border-radius:28px;padding:32px">
+      <h2 style="font-size:26px;margin-bottom:10px">What happens after you reach out</h2>
+      <ol style="list-style:none;padding:0;display:flex;flex-direction:column;gap:14px">
+        <li style="display:flex;gap:14px"><span class="num-sm">1</span><span>We reply {{ site.replyTime }}.</span></li>
+        <li style="display:flex;gap:14px"><span class="num-sm">2</span><span>A short, private conversation about what you need.</span></li>
+        <li style="display:flex;gap:14px"><span class="num-sm">3</span><span>We book your first session with the right person.</span></li>
+      </ol>
+      <a href="/what-to-expect/" style="font-weight:600;margin-top:14px">Questions about fees, privacy or online sessions →</a>
+    </div>
+    <div class="card tone-dark" style="border-radius:28px;padding:32px;gap:14px;background:var(--ink)">
+      <div style="display:flex;gap:12px;align-items:center">{{ m.icon("alert", 28, "#FF9966") | safe }}<h2 style="font-size:26px;color:#fff">In an emergency</h2></div>
+      <p style="color:#E3F2EF">If you or someone else is in immediate danger, or might act on thoughts of suicide, call <strong style="color:#fff">112</strong> or go to the nearest hospital emergency department now.</p>
+      <p style="color:#B9D3CE;font-size:15px">This website, our forms and our WhatsApp line are not monitored for emergencies. [Add any urgent-contact arrangement Balm offers.]</p>
+      <a class="btn btn-coral" style="align-self:flex-start" href="tel:112">Call 112</a>
+    </div>
+  </div>
+</section>

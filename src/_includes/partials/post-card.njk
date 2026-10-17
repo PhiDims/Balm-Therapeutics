@@ -1,0 +1,6 @@
+{# Expects `p` (a blog post) #}
+<a class="post-card" href="{{ p.url }}">
+  <span class="thumb">{% if p.data.image %}<img src="{{ p.data.image }}" alt="" loading="lazy">{% endif %}</span>
+  <span class="cat">{{ p.data.category or "Article" }}</span>
+  <span class="t">{{ p.data.title }}</span>
+</a>

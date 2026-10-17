@@ -1,0 +1,47 @@
+{
+  "groups": [
+    {
+      "title": "Your first session",
+      "items": [
+        { "q": "What happens in a first session?", "a": "Your therapist asks about what's happening, your story so far and what you hope will change. You share only what you're ready to. Most people leave feeling lighter for having started." },
+        { "q": "Do I need a referral or a diagnosis?", "a": "No. You can contact us directly. If something is getting in the way of your life, that's reason enough." },
+        { "q": "How long is a session?", "a": "[Confirm session lengths, for example 50 minutes for adults and 45 minutes for children.]" }
+      ]
+    },
+    {
+      "title": "Confidentiality",
+      "items": [
+        { "q": "Is what I say confidential?", "a": "Yes. What you share stays between you and your therapist. The exceptions are if we believe you or someone else is at serious risk of harm, if a child may be in danger, or if the law requires it. Where we can, we will talk with you first." },
+        { "q": "Who sees the forms I fill in on this website?", "a": "Only our intake team. The forms ask for contact details only, and we talk about what's going on when we speak. Our privacy page explains how long we keep them." }
+      ]
+    },
+    {
+      "title": "Fees and payment",
+      "items": [
+        { "q": "How much does it cost?", "a": "[Decide: show fees, a fee range, or 'contact us for fees'.]" },
+        { "q": "Do you offer reduced fees?", "a": "[Confirm whether a sliding scale or reduced-fee option exists.]" },
+        { "q": "How do I pay?", "a": "[Confirm payment methods, for example bank transfer or POS.]" }
+      ]
+    },
+    {
+      "title": "Online sessions",
+      "items": [
+        { "q": "Can I have sessions online?", "a": "[Confirm which services are offered online, and on which platforms.]" },
+        { "q": "What do I need for an online session?", "a": "A private, quiet space, a phone or computer, and a steady internet connection. If the line drops, your therapist will call you back." }
+      ]
+    },
+    {
+      "title": "Cancellations",
+      "items": [
+        { "q": "What if I need to cancel?", "a": "[Confirm cancellation notice, for example 24 hours, and any fee for late cancellation.]" }
+      ]
+    },
+    {
+      "title": "Working with children",
+      "items": [
+        { "q": "Do parents join sessions?", "a": "We meet parents first, without the child. After that, sessions are usually with the child alone, and we meet parents regularly to share themes and ways to help at home." },
+        { "q": "Will you tell me what my child says?", "a": "We share the themes we notice and how you can help. The details stay private, because that trust is part of what helps. If we are ever worried about your child's safety, we will tell you." }
+      ]
+    }
+  ]
+}

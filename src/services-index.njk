@@ -1,0 +1,79 @@
+---
+layout: layouts/base.njk
+title: Our services
+permalink: /services/
+navSection: services
+description: Individual therapy, child and play therapy, couples counselling, trauma care, post-rehabilitation support, assessments, training and consultation in Jos, Nigeria.
+---
+{% import "macros.njk" as m %}
+{% set finder = [
+  { id: "me", label: "For myself", picks: ["individual-therapy", "trauma-care", "post-rehabilitation"], msg: "Hello Balm, I'd like to talk to someone for myself" },
+  { id: "child", label: "For my child or teenager", picks: ["child-play-therapy", "assessments"], msg: "Hello Balm, I'd like help for my child" },
+  { id: "couple", label: "For my relationship", picks: ["couples-counselling"], msg: "Hello Balm, I'd like to ask about couples counselling" },
+  { id: "org", label: "For my school, church or organisation", picks: ["training", "consultation"], msg: "Hello Balm, I'd like to ask about training for my organisation" }
+] %}
+
+<section class="hero tone-mint section" style="padding-top: clamp(20px, 3vw, 28px)">
+  {{ m.squiggle("right: -100px; bottom: -120px; width: 420px; height: 420px", "#C7E7E2", "b") | safe }}
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Services</span></nav>
+    <h1 style="margin-bottom:16px">Our services</h1>
+    <p class="lead">{{ collections.services.length }} ways we help, from one-to-one therapy to training for whole organisations. Not sure which one fits? Start with the question below.</p>
+  </div>
+</section>
+
+<section class="tone-white" id="finder" style="padding-top:56px">
+  <div class="wrap">
+    <div class="finder">
+      <h2 style="font-size:clamp(24px,2.8vw,34px);margin-bottom:6px">Find the right support</h2>
+      <p class="muted" style="margin-bottom:20px">Who are you looking for help for?</p>
+      <div class="pills" role="group" aria-label="Who is the help for" data-pick-group=".finder-match" data-wa-target="#finder-wa">
+        {% for f in finder %}
+        <button class="pill" type="button" data-pick="{{ f.id }}" data-wa="{{ f.msg | wa(site.whatsapp) }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ f.label }}</button>
+        {% endfor %}
+      </div>
+      <div class="finder-result" aria-live="polite">
+        <p style="font-weight:600;margin-bottom:14px">We'd suggest starting here:</p>
+        <div class="grid">
+          {% for s in collections.services %}
+          <a class="card finder-match" data-keys="{{ s.fileSlug | finderKeys(finder) }}" href="{{ s.url }}"><h3 style="font-size:20px">{{ s.data.title }}</h3><p>{{ s.data.card }}</p><span class="go">Read more →</span></a>
+          {% endfor %}
+        </div>
+        <a id="finder-wa" class="btn btn-primary" style="margin-top:20px" href="{{ finder[0].msg | wa(site.whatsapp) }}">{{ m.icon("whatsapp", 20) | safe }} Ask us on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tone-white" style="padding-top:48px">
+  <div class="wrap">
+    <h2 style="font-size:clamp(26px,2.8vw,34px);margin-bottom:22px">For you and your family</h2>
+    <div class="grid" style="--min: 300px;margin-bottom:56px">
+      {% for s in collections.services %}{% if s.data.group == "family" %}
+      <a class="card bordered" href="{{ s.url }}" style="padding:28px">
+        <span class="eyebrow">{{ s.data.menuLine }}</span>
+        <h3 style="font-size:23px">{{ s.data.title }}</h3>
+        <p style="font-size:16px">{{ s.data.card }}</p>
+        <span class="go">Read more →</span>
+      </a>
+      {% endif %}{% endfor %}
+    </div>
+    <h2 style="font-size:clamp(26px,2.8vw,34px);margin-bottom:22px">For schools, churches and organisations</h2>
+    <div class="grid" style="--min: 300px">
+      {% for s in collections.services %}{% if s.data.group == "org" %}
+      <a class="card mint" href="{{ s.url }}" style="padding:28px">
+        <h3 style="font-size:23px">{{ s.data.title }}</h3>
+        <p style="font-size:16px">{{ s.data.card }}</p>
+        <span class="go">Read more →</span>
+      </a>
+      {% endif %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section tone-coral cta-band">
+  <div class="wrap">
+    <div><h2>Still not sure which service fits?</h2><p style="font-size:18px">Tell us a little about what's going on and we'll point you to the right person.</p></div>
+    <a class="btn btn-dark" href="{{ "Hello Balm, I'm not sure which service I need" | wa(site.whatsapp) }}">{{ m.icon("whatsapp", 22) | safe }} Message us on WhatsApp</a>
+  </div>
+</section>

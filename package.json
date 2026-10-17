@@ -1,0 +1,14 @@
+{
+  "name": "balm-therapeutics-site",
+  "version": "1.0.0",
+  "description": "Balm Therapeutic Services website",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2"
+  },
+  "private": true,
+  "type": "module"
+}

@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+title: Blog and resources
+permalink: /blog/
+navSection: blog
+description: Articles on mental health, trauma, parenting, relationships and wellbeing from the team at Balm Therapeutic Services.
+---
+{% import "macros.njk" as m %}
+
+<section class="hero tone-mint section" style="padding-top: clamp(20px, 3vw, 28px)">
+  {{ m.squiggle("right: -110px; top: -80px; width: 440px; height: 440px", "#C7E7E2", "b") | safe }}
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <span>Blog</span></nav>
+    <h1 style="margin-bottom:16px">Blog and resources</h1>
+    <p class="lead">Plain-language articles on mental health, trauma, parenting and relationships, written by our team.</p>
+  </div>
+</section>
+
+<section class="section tone-white">
+  <div class="wrap">
+    <div class="grid" style="--min: 260px;gap:28px 20px">
+      {% for p in collections.posts %}
+      <div>
+        {% include "partials/post-card.njk" %}
+        {% if p.data.summary %}<p class="muted" style="font-size:15px;margin-top:8px">{{ p.data.summary }}</p>{% endif %}
+        <p class="muted" style="font-size:14px;margin-top:6px">{{ p.date | longDate }}</p>
+      </div>
+      {% else %}
+      <p class="muted">New articles are coming soon.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section tone-sand" id="resources">
+  <div class="wrap">
+    <p class="eyebrow">Free resources</p>
+    <h2>Handouts you can download</h2>
+    <p class="muted" style="margin-top:10px">Short guides on grief, sleep, supporting a child after trauma and more are on the way. [Phase 2]</p>
+  </div>
+</section>

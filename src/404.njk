@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: Page not found
+permalink: /404.html
+eleventyExcludeFromCollections: true
+---
+{% import "macros.njk" as m %}
+<section class="hero tone-mint section">
+  <div class="wrap" style="max-width:760px">
+    <p class="eyebrow">Page not found</p>
+    <h1 style="margin-bottom:16px">We couldn't find that page</h1>
+    <p class="lead" style="margin-bottom:28px">It may have moved when we updated our website. These links might help.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/">Go to the homepage</a>
+      <a class="btn btn-outline" href="/services/">Our services</a>
+      <a class="btn btn-outline" href="{{ m.waLink(site) }}">WhatsApp us</a>
+    </div>
+  </div>
+</section>

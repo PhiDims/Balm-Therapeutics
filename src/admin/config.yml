@@ -1,0 +1,254 @@
+# Balm website editor (Decap CMS)
+# Team members sign in with GitHub at balmtherapeutics.com.ng/admin
+# Every save is published automatically by Cloudflare within about a minute.
+
+backend:
+  name: github
+  repo: PhiDims/Balm-Therapeutics
+  branch: main
+  base_url: https://balmtherapeutics.com.ng
+  auth_endpoint: api/auth
+  commit_messages:
+    create: "Add {{collection}}: {{slug}}"
+    update: "Update {{collection}}: {{slug}}"
+    delete: "Remove {{collection}}: {{slug}}"
+
+site_url: https://balmtherapeutics.com.ng
+display_url: https://balmtherapeutics.com.ng
+logo_url: /assets/img/balm-logo.png
+locale: en
+
+media_folder: src/assets/uploads
+public_folder: /assets/uploads
+
+collections:
+
+  # ---------- Events ----------
+  - name: events
+    label: Events
+    label_singular: Event
+    description: Upcoming events appear on the homepage and Events page. Past events move to the archive on their own.
+    folder: src/events
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{start | date('D MMM YYYY')}}: {{title}}"
+    sortable_fields: [start, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Starts, name: start, widget: datetime, date_format: "D MMM YYYY", time_format: "h:mm a" }
+      - { label: Ends, name: end, widget: datetime, required: false, date_format: "D MMM YYYY", time_format: "h:mm a" }
+      - { label: Time as shown, name: time, widget: string, required: false, hint: "e.g. 10am to 1pm" }
+      - { label: Venue, name: venue, widget: string, required: false, hint: "e.g. Balm office, Jos, or Online" }
+      - { label: Registration link, name: registerLink, widget: string, required: false, hint: "Google Form, Selar or similar. Leave empty to register by WhatsApp." }
+      - { label: Short description, name: summary, widget: text, required: false }
+
+  # ---------- Blog ----------
+  - name: blog
+    label: Blog
+    label_singular: Article
+    folder: src/blog
+    create: true
+    slug: "{{slug}}"
+    summary: "{{date | date('D MMM YYYY')}}: {{title}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, time_format: false, date_format: "D MMM YYYY" }
+      - { label: Category, name: category, widget: select, options: [Mental health, Trauma, Children and parenting, Relationships, Faith and wellbeing, Training, News] }
+      - { label: Short summary, name: summary, widget: text, hint: "One or two sentences for the blog list and link previews." }
+      - { label: Author, name: author, widget: string, required: false }
+      - { label: Image, name: image, widget: image, required: false, hint: "Use real photos with consent. No clients." }
+      - { label: Draft (hide from site), name: draft, widget: boolean, default: false, required: false }
+      - { label: Article, name: body, widget: markdown }
+
+  # ---------- Team ----------
+  - name: team
+    label: Team
+    label_singular: Team member
+    folder: src/team
+    create: true
+    slug: "{{name}}"
+    identifier_field: name
+    summary: "{{order}}. {{name}} ({{role}})"
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Role, name: role, widget: string }
+      - { label: Areas of focus, name: focus, widget: string, hint: "One short line, e.g. Children, trauma, play therapy" }
+      - { label: Qualifications, name: credentials, widget: string, required: false }
+      - { label: Professional memberships, name: memberships, widget: string, required: false }
+      - { label: Languages, name: languages, widget: string, required: false }
+      - label: Shown under these filters
+        name: areas
+        widget: select
+        multiple: true
+        options: [{ label: Adults, value: adults }, { label: Children, value: children }, { label: Trauma, value: trauma }, { label: Couples, value: couples }, { label: Training and outreach, value: training }]
+      - { label: Order on the page, name: order, widget: number, value_type: int }
+      - { label: Photo, name: photo, widget: image, required: false, hint: "Portrait, shown in black and white." }
+      - { label: Short bio, name: body, widget: markdown, required: false }
+
+  # ---------- Services ----------
+  - name: services
+    label: Services
+    label_singular: Service page
+    description: The 8 service pages. Edit the words here. Ask the web lead before changing the order or adding a page.
+    folder: src/services
+    create: false
+    delete: false
+    summary: "{{order}}. {{title}}"
+    sortable_fields: [order]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Order, name: order, widget: number, value_type: int }
+      - { label: Menu group, name: group, widget: select, options: [{ label: "For you and your family", value: family }, { label: "For organisations", value: org }] }
+      - { label: Small heading above title, name: eyebrow, widget: string }
+      - { label: Line under the name in the menu, name: menuLine, widget: string }
+      - { label: Card description (homepage and lists), name: card, widget: text }
+      - { label: Highlight card in coral, name: featured, widget: boolean, required: false }
+      - { label: Page colour, name: tone, widget: select, options: [mint, peach, sand, teal] }
+      - { label: Introduction, name: intro, widget: text }
+      - { label: Photo, name: photo, widget: image, required: false }
+      - { label: Photo note (shown until a photo is added), name: photoNote, widget: string, required: false }
+      - { label: Show "in danger right now" note, name: showDanger, widget: boolean, required: false }
+      - { label: WhatsApp message, name: whatsapp, widget: string }
+      - { label: Main button label, name: buttonLabel, widget: string, required: false }
+      - { label: Main button link, name: buttonHref, widget: string, required: false }
+      - { label: Show profile download button, name: profileDownload, widget: boolean, required: false }
+      - label: Quick facts
+        name: facts
+        widget: list
+        fields: [{ label: Label, name: label, widget: string }, { label: Value, name: value, widget: string }]
+      - { label: "Who it's for: small heading", name: whoEyebrow, widget: string, required: false }
+      - { label: "Who it's for: title", name: whoTitle, widget: string }
+      - { label: "Who it's for: introduction", name: whoIntro, widget: text, required: false }
+      - { label: "Who it's for: checklist", name: whoList, widget: list, required: false }
+      - { label: "Who it's for: quotes", name: whoQuotes, widget: list, required: false }
+      - label: "Who it's for: two columns"
+        name: whoSplit
+        widget: list
+        required: false
+        fields: [{ label: Title, name: title, widget: string }, { label: Text, name: text, widget: text, required: false }, { label: Items, name: items, widget: list }, { label: Note, name: note, widget: string, required: false }]
+      - label: "Who it's for: cards"
+        name: whoCards
+        widget: list
+        required: false
+        fields: [{ label: Title, name: title, widget: string }, { label: Text, name: text, widget: text }]
+      - { label: "What it helps with: small heading", name: helpsEyebrow, widget: string, required: false }
+      - { label: "What it helps with: title", name: helpsTitle, widget: string }
+      - { label: "What it helps with: introduction", name: helpsIntro, widget: text, required: false }
+      - label: "What it helps with: cards"
+        name: helps
+        widget: list
+        fields: [{ label: Title, name: title, widget: string }, { label: Text, name: text, widget: text }]
+      - { label: Approaches, name: approaches, widget: list, required: false }
+      - label: Approach explanations
+        name: approachNotes
+        widget: list
+        required: false
+        fields: [{ label: Term, name: term, widget: string }, { label: Explanation, name: text, widget: text }]
+      - { label: "Steps: small heading", name: stepsEyebrow, widget: string, required: false }
+      - { label: "Steps: title", name: stepsTitle, widget: string }
+      - { label: "Steps: introduction", name: stepsIntro, widget: text, required: false }
+      - { label: "Steps: label instead of numbers", name: stepLabel, widget: string, required: false, hint: "e.g. Stage" }
+      - label: Steps
+        name: steps
+        widget: list
+        fields: [{ label: Title, name: title, widget: string }, { label: Text, name: text, widget: text }]
+      - label: Note under the steps
+        name: stepsNote
+        widget: object
+        required: false
+        fields: [{ label: Bold start, name: title, widget: string }, { label: Text, name: text, widget: text }]
+      - label: Coral alert strip
+        name: alert
+        widget: object
+        required: false
+        fields: [{ label: Bold start, name: title, widget: string }, { label: Text, name: text, widget: text }]
+      - label: Extra band
+        name: band
+        widget: object
+        required: false
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Text, name: text, widget: text }
+          - { label: Links, name: links, widget: list, fields: [{ label: Label, name: label, widget: string }, { label: Service page (file name), name: service, widget: string }] }
+      - label: Research block
+        name: research
+        widget: object
+        required: false
+        fields: [{ label: Title, name: title, widget: string }, { label: Text, name: text, widget: text }, { label: Topics, name: topics, widget: list }]
+      - label: Information panels
+        name: panels
+        widget: list
+        required: false
+        fields: [{ label: Title, name: title, widget: string }, { label: Colour, name: tone, widget: select, options: [mint, peach] }, { label: Items, name: items, widget: list }]
+      - { label: Show partner logos, name: logos, widget: boolean, required: false }
+      - { label: "Team: small heading", name: teamEyebrow, widget: string, required: false }
+      - { label: "Team: title", name: teamTitle, widget: string }
+      - { label: "Team members shown (file names)", name: team, widget: list, hint: "e.g. philip-dimka" }
+      - { label: Show training enquiry form, name: enquiryForm, widget: boolean, required: false }
+      - { label: "Questions: small heading", name: faqsEyebrow, widget: string, required: false }
+      - { label: "Questions: title", name: faqsTitle, widget: string, required: false }
+      - label: Questions
+        name: faqs
+        widget: list
+        fields: [{ label: Question, name: q, widget: string }, { label: Answer, name: a, widget: text }]
+      - { label: "Related: title", name: relatedTitle, widget: string }
+      - { label: "Related services (file names)", name: related, widget: list }
+      - { label: "Booking band: title", name: ctaTitle, widget: string, required: false }
+      - { label: "Booking band: text", name: ctaText, widget: text, required: false }
+      - { label: Hide booking band, name: noCta, widget: boolean, required: false }
+      - { label: Phone bar second button, name: actionBarSecond, widget: select, required: false, options: [{ label: Call, value: call }, { label: Enquire, value: enquire }] }
+
+  # ---------- Site settings ----------
+  - name: settings
+    label: Site settings
+    editor: { preview: false }
+    files:
+      - name: site
+        label: Contact details and hours
+        file: src/_data/site.json
+        fields:
+          - { label: Organisation name, name: name, widget: string }
+          - { label: Short name, name: shortName, widget: string }
+          - { label: Tagline, name: tagline, widget: string }
+          - { label: Website address, name: url, widget: string }
+          - { label: Site description (Google), name: description, widget: text }
+          - { label: Phone as shown, name: phoneDisplay, widget: string }
+          - { label: Phone for calling (+234…), name: phoneLink, widget: string }
+          - { label: WhatsApp number (digits only), name: whatsapp, widget: string }
+          - { label: Default WhatsApp message, name: whatsappMessage, widget: string }
+          - { label: Email, name: email, widget: string }
+          - { label: Street address, name: address, widget: string }
+          - { label: Landmark, name: landmark, widget: string }
+          - { label: City, name: city, widget: string }
+          - { label: Google Maps link, name: mapLink, widget: string }
+          - { label: Opening hours, name: hours, widget: list, fields: [{ label: Days, name: days, widget: string }, { label: Time, name: time, widget: string }] }
+          - { label: Hours in one line, name: hoursShort, widget: string }
+          - { label: Reply time promise, name: replyTime, widget: string }
+          - { label: Web3Forms access key, name: web3formsKey, widget: string }
+          - { label: Emergency message, name: emergency, widget: text }
+      - name: faqs
+        label: What to expect (FAQs)
+        file: src/_data/faqs.json
+        fields:
+          - label: Topics
+            name: groups
+            widget: list
+            fields:
+              - { label: Topic, name: title, widget: string }
+              - { label: Questions, name: items, widget: list, fields: [{ label: Question, name: q, widget: string }, { label: Answer, name: a, widget: text }] }
+      - name: testimonials
+        label: Kind words (testimonials)
+        file: src/_data/testimonials.json
+        fields:
+          - { label: Reminder, name: note, widget: string }
+          - label: Testimonials
+            name: items
+            widget: list
+            hint: Only with written consent on file. Use first names or initials.
+            fields: [{ label: Quote, name: quote, widget: text }, { label: Name or initials, name: name, widget: string }, { label: Service or organisation, name: context, widget: string }]
+      - name: partners
+        label: Memberships and partners
+        file: src/_data/partners.json
+        fields:
+          - { label: Memberships, name: memberships, widget: list, fields: [{ label: Name, name: name, widget: string }, { label: Logo, name: logo, widget: image, required: false }] }
+          - { label: Organisations we've trained (with permission), name: trained, widget: list, required: false, fields: [{ label: Name, name: name, widget: string }, { label: Logo, name: logo, widget: image, required: false }] }

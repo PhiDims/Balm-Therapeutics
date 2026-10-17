@@ -1,0 +1,29 @@
+---
+layout: layouts/base.njk
+---
+{% import "macros.njk" as m %}
+<article>
+  <header class="hero tone-mint section" style="padding-top: clamp(20px, 3vw, 28px)">
+    <div class="wrap" style="max-width:860px">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog/">Blog</a></nav>
+      <p class="eyebrow">{{ category or "Article" }}</p>
+      <h1 style="font-size:clamp(32px,4.2vw,52px);margin-bottom:16px">{{ title }}</h1>
+      <p class="muted">{{ page.date | longDate }}{% if author %} · {{ author }}{% endif %}</p>
+    </div>
+  </header>
+  {% if image %}<div class="wrap" style="max-width:960px;margin-top:-40px"><img src="{{ image }}" alt="" style="border-radius:28px;width:100%"></div>{% endif %}
+  <div class="section tone-white">
+    <div class="wrap prose">
+      {{ content | safe }}
+    </div>
+  </div>
+</article>
+<section class="section tone-coral cta-band">
+  <div class="wrap">
+    <div><h2>Want to talk to someone?</h2><p style="font-size:18px">If this article stirred something up, we're here. A short message is enough.</p></div>
+    <div class="btn-row">
+      <a class="btn btn-dark" href="{{ m.waLink(site) }}">{{ m.icon("whatsapp", 22) | safe }} Message us on WhatsApp</a>
+      <a class="btn btn-white" href="/blog/">More articles</a>
+    </div>
+  </div>
+</section>

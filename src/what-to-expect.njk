@@ -1,0 +1,53 @@
+---
+layout: layouts/base.njk
+title: What to expect
+permalink: /what-to-expect/
+navSection: expect
+description: What happens when you contact Balm, what a first session is like, confidentiality and its limits, fees, online sessions and working with children.
+---
+{% import "macros.njk" as m %}
+
+<section class="hero tone-mint section" style="padding-top: clamp(20px, 3vw, 28px)">
+  {{ m.squiggle("right: -110px; top: -80px; width: 440px; height: 440px", "#C7E7E2", "b") | safe }}
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <span>What to expect</span></nav>
+    <h1 style="margin-bottom:16px;max-width:14em">What to expect when you come to Balm</h1>
+    <p class="lead">Reaching out is often the hardest part. Here's what happens next, and answers to the questions people ask us most.</p>
+  </div>
+</section>
+
+<section class="section tone-teal">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Step by step</p><h2>Your first visit</h2></div>
+    <ol class="steps">
+      <li><span class="num" aria-hidden="true">1</span><h3>Reach out</h3><p>Send a WhatsApp message, call us, or fill in the short form. You don't have to explain everything yet.</p></li>
+      <li><span class="num" aria-hidden="true">2</span><h3>A short first conversation</h3><p>We ask a few gentle questions to understand what you need and which member of our team fits best.</p></li>
+      <li><span class="num" aria-hidden="true">3</span><h3>Your first session</h3><p>You meet your therapist, in person or online, and together you decide how to go on from there.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section tone-sand">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Questions people ask</p><h2>Before you book</h2></div>
+    <nav aria-label="Jump to topic" class="chips" style="margin-bottom:32px">
+      {% for g in faqs.groups %}<a class="chip" href="#faq-{{ loop.index }}" style="text-decoration:none;color:var(--ink)">{{ g.title }}</a>{% endfor %}
+    </nav>
+    {% for g in faqs.groups %}
+    <div class="faq-wrap" id="faq-{{ loop.index }}" style="margin-bottom:40px">
+      <div class="side"><h3 style="font-size:24px">{{ g.title }}</h3></div>
+      <div class="list">{{ m.faqList(g.items) | safe }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section tone-coral cta-band">
+  <div class="wrap">
+    <div><h2>Still have a question?</h2><p style="font-size:18px">Ask us on WhatsApp. We're happy to answer before you decide anything.</p></div>
+    <div class="btn-row">
+      <a class="btn btn-dark" href="{{ "Hello Balm, I have a question before booking" | wa(site.whatsapp) }}">{{ m.icon("whatsapp", 22) | safe }} Ask on WhatsApp</a>
+      <a class="btn btn-white" href="/contact/">Contact us</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,270 @@
+---
+layout: layouts/base.njk
+---
+{% import "macros.njk" as m %}
+{% set wa = whatsapp | wa(site.whatsapp) %}
+{% set dark = tone == "teal" %}
+{% set squiggleColor = "#178074" if dark else ("#FFD9C4" if tone == "peach" or tone == "sand" else "#C7E7E2") %}
+
+<!-- 1. Hero with quick facts -->
+<section class="hero tone-{{ tone }} section" style="padding-top: clamp(20px, 3vw, 28px)">
+  {{ m.squiggle("right: -110px; top: -80px; width: 440px; height: 440px", squiggleColor, "b") | safe }}
+  <div class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/services/">Services</a> / <span>{{ title }}</span></nav>
+    <div class="hero-grid">
+      <div class="text">
+        <p class="eyebrow">{{ eyebrow }}</p>
+        <h1>{{ title }}</h1>
+        <p class="lead">{{ intro }}</p>
+        <div class="btn-row">
+          {% if buttonHref %}
+          <a class="btn {{ 'btn-coral' if dark else 'btn-primary' }}" href="{{ buttonHref }}">{{ buttonLabel }}</a>
+          {% else %}
+          <a class="btn {{ 'btn-coral' if dark else 'btn-primary' }}" href="{{ wa }}">{{ m.icon("whatsapp", 22) | safe }} {{ buttonLabel or "Book on WhatsApp" }}</a>
+          {% endif %}
+          {% if profileDownload %}
+          <a class="btn {{ 'btn-ghost-light' if dark else 'btn-outline' }}" href="/assets/balm-company-profile.pdf">{{ m.icon("download", 20) | safe }} Download our profile (PDF)</a>
+          {% else %}
+          <a class="btn btn-outline" href="tel:{{ site.phoneLink }}">Call {{ site.phoneDisplay }}</a>
+          {% endif %}
+        </div>
+        {% if showDanger %}
+        <p class="danger-note">{{ m.icon("alert", 18, "#B4521F") | safe }}<span>If you are in danger right now, call 112 or go to the nearest hospital.</span></p>
+        {% endif %}
+      </div>
+      <div class="media">
+        {{ m.photo(photoNote, photo, title, "ph-photo" + (" ph-dashed" if tone == "peach" or dark else "")) | safe }}
+      </div>
+    </div>
+    <dl class="facts">
+      {% for f in facts %}<div><dt>{{ f.label }}</dt><dd>{{ f.value }}</dd></div>{% endfor %}
+    </dl>
+  </div>
+</section>
+
+<!-- 2. Who it's for -->
+<section class="section tone-white">
+  <div class="wrap">
+    {% if whoList or whoQuotes %}
+    <div class="two-col">
+      <div class="side">
+        <p class="eyebrow">{{ whoEyebrow or "Who it's for" }}</p>
+        <h2>{{ whoTitle }}</h2>
+        {% if whoIntro %}<p class="lead" style="margin-top:16px">{{ whoIntro }}</p>{% endif %}
+      </div>
+      <ul class="main checklist{% if whoQuotes %} quotes{% endif %}">
+        {% for item in (whoList or whoQuotes) %}
+        <li>{% if whoList %}{{ m.icon("check", 22, "#0E6B62", 2.2) | safe }}{% endif %}<span>{{ item }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% else %}
+    <div class="section-head">
+      <p class="eyebrow">{{ whoEyebrow or "Who it's for" }}</p>
+      <h2>{{ whoTitle }}</h2>
+      {% if whoIntro %}<p class="lead">{{ whoIntro }}</p>{% endif %}
+    </div>
+    {% if whoSplit %}
+    <div class="split-cards">
+      {% for c in whoSplit %}
+      <div class="card {{ 'mint' if loop.first else 'peach' }}">
+        <h3>{{ c.title }}</h3>
+        {% if c.text %}<p>{{ c.text }}</p>{% endif %}
+        <ul>{% for i in c.items %}<li>{{ i }}</li>{% endfor %}</ul>
+        {% if c.note %}<p class="note">{{ c.note }}</p>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% elif whoCards %}
+    <div class="grid" style="--min: 220px">
+      {% for c in whoCards %}
+      <div class="card {{ 'peach' if loop.last and whoCards.length == 4 else 'mint' }}">
+        <h3>{{ c.title }}</h3>
+        <p>{{ c.text }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+  </div>
+</section>
+
+<!-- 3. What it helps with -->
+<section class="section tone-mint">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">{{ helpsEyebrow or "What it helps with" }}</p>
+      <h2>{{ helpsTitle }}</h2>
+      {% if helpsIntro %}<p class="lead">{{ helpsIntro }}</p>{% endif %}
+    </div>
+    <div class="grid" style="--min: 250px">
+      {% for h in helps %}
+      <div class="card"><h3 style="font-size:20px">{{ h.title }}</h3><p>{{ h.text }}{% if h.title == "Play-based work for children" %} <a href="/services/child-play-therapy/">About play therapy</a>{% endif %}</p></div>
+      {% endfor %}
+    </div>
+    {% if approaches %}
+    <div class="approaches">
+      <div>
+        <p style="font-weight:600;margin-bottom:12px">Approaches we use</p>
+        <div class="chips">{% for a in approaches %}<span class="chip">{{ a }}</span>{% endfor %}</div>
+      </div>
+      {% if approachNotes %}
+      <div class="notes">{% for n in approachNotes %}<p><strong style="color:#12302C">{{ n.term }}</strong> {{ n.text }}</p>{% endfor %}</div>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- 4. What to expect -->
+<section class="section {{ 'tone-white' if dark else 'tone-teal' }}">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">{{ stepsEyebrow or "What to expect" }}</p>
+      <h2>{{ stepsTitle }}</h2>
+      {% if stepsIntro %}<p class="lead">{{ stepsIntro }}</p>{% endif %}
+    </div>
+    <ol class="steps">
+      {% for s in steps %}
+      <li>
+        {% if stepLabel %}<span class="stage">{{ stepLabel }} {{ loop.index }}</span>{% else %}<span class="num" aria-hidden="true">{{ loop.index }}</span>{% endif %}
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.text }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+    {% if stepsNote %}
+    <div class="note-box">{{ m.icon("person", 26, "#FFC9AB") | safe }}<p><strong>{{ stepsNote.title }}</strong> {{ stepsNote.text }}</p></div>
+    {% endif %}
+    {% if alert %}
+    <div class="alert-strip"><p><strong>{{ alert.title }}</strong> {{ alert.text }}</p><a class="btn btn-dark" href="tel:{{ site.phoneLink }}">Call {{ site.phoneDisplay }}</a></div>
+    {% endif %}
+  </div>
+</section>
+
+{% if panels %}
+<section class="section tone-white">
+  <div class="wrap split-cards">
+    {% for p in panels %}
+    <div class="card {{ p.tone }}">
+      <h2 style="font-size:26px">{{ p.title }}</h2>
+      <ul class="checklist" style="gap:8px">{% for i in p.items %}<li style="background:transparent;padding:0">{{ m.icon("check", 22, "#0E6B62", 2.2) | safe }}<span>{{ i }}</span></li>{% endfor %}</ul>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if band %}
+<section class="section tone-sand inline-band" style="padding-top:48px;padding-bottom:48px">
+  <div class="wrap">
+    <div><h2>{{ band.title }}</h2><p class="muted">{{ band.text }}</p></div>
+    <div class="btn-row">{% for l in band.links %}<a class="btn btn-outline" href="/services/{{ l.service }}/">{{ l.label }}</a>{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+
+{% if research %}
+<section class="section tone-sand inline-band" style="padding-top:56px;padding-bottom:56px">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Research</p>
+      <h2>{{ research.title }}</h2>
+      <p class="muted" style="margin-bottom:16px">{{ research.text }}</p>
+      <div class="chips">{% for t in research.topics %}<span class="chip">{{ t }}</span>{% endfor %}</div>
+    </div>
+    <a class="btn btn-outline" href="mailto:{{ site.email }}?subject=Research%20collaboration">Talk to us about research</a>
+  </div>
+</section>
+{% endif %}
+
+{% if logos %}
+<section class="tone-sand" style="padding:44px 0">
+  <div class="wrap">
+    <p class="center muted" style="font-weight:600;margin-bottom:18px">Organisations we've trained</p>
+    <div class="logo-strip">
+      {% for p in partners.trained %}<div>{% if p.logo %}<img src="{{ p.logo }}" alt="{{ p.name }}" style="max-height:48px;width:auto">{% else %}{{ p.name }}{% endif %}</div>{% else %}
+      {% for i in range(4) %}<div class="empty">[Partner logo]</div>{% endfor %}{% endfor %}
+    </div>
+    <p class="center muted" style="font-size:14px;margin-top:14px">Named only with each organisation's permission.</p>
+  </div>
+</section>
+{% endif %}
+
+<!-- 5. Who offers it -->
+<section class="section tone-white">
+  <div class="wrap">
+    <div class="section-head split">
+      <div><p class="eyebrow">{{ teamEyebrow or "Who offers it" }}</p><h2>{{ teamTitle }}</h2></div>
+      <a class="more" href="/about/#team">Meet the whole team →</a>
+    </div>
+    <div class="people">
+      {% for p in collections.team | bySlugs(team) %}
+      <div class="person-row">
+        {{ m.portrait(p, loop.index0 % 2) | safe }}
+        <div class="info">
+          <span class="name">{{ p.data.name }}</span>
+          <span class="role">{{ p.data.role }}</span>
+          <span class="focus">{{ p.data.focus }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if enquiryForm %}
+<section class="section tone-mint" id="enquire">
+  <div class="wrap two-col">
+    <div class="side">
+      <p class="eyebrow">Training enquiry</p>
+      <h2>Tell us about your group</h2>
+      <p class="lead" style="margin:14px 0 24px">We'll reply {{ site.replyTime }} with questions or a proposal and quote.</p>
+      <p><a href="{{ wa }}" style="font-weight:600">Or message us on WhatsApp →</a></p>
+      <p style="margin-top:10px"><a href="/assets/balm-company-profile.pdf" style="font-weight:600">Download our company profile (PDF) →</a></p>
+    </div>
+    <div class="main">
+      {% set preselect = "training" %}{% set showTopics = true %}{% set formClass = "" %}
+      {% include "partials/form-org.njk" %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- 6. Questions -->
+<section class="section tone-sand" id="faq">
+  <div class="wrap faq-wrap">
+    <div class="side">
+      <p class="eyebrow">{{ faqsEyebrow or "Questions people ask" }}</p>
+      <h2>{{ faqsTitle or "Before you book" }}</h2>
+      <p class="muted" style="margin-top:14px">Something else on your mind? <a href="{{ wa }}">Send it to us on WhatsApp</a> and we'll answer. More answers on our <a href="/what-to-expect/">What to expect</a> page.</p>
+    </div>
+    <div class="list">{{ m.faqList(faqs) | safe }}</div>
+  </div>
+</section>
+
+<!-- 7. Related services -->
+<section class="section tone-white">
+  <div class="wrap">
+    <div class="section-head"><h2 style="font-size:clamp(26px,3vw,36px)">{{ relatedTitle }}</h2></div>
+    <div class="grid">
+      {% for r in collections.services | bySlugs(related) %}
+      <a class="card bordered" href="{{ r.url }}"><h3 style="font-size:20px">{{ r.data.title }}</h3><p>{{ r.data.card }}</p><span class="go">Learn more →</span></a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 8. Booking band -->
+{% if not noCta %}
+<section class="section tone-coral cta-band">
+  {{ m.squiggle("left: -60px; bottom: -60px; width: 520px; height: 260px", "#FFB48C") | safe }}
+  <div class="wrap">
+    <div><h2>{{ ctaTitle }}</h2><p style="font-size:18px">{{ ctaText }}</p></div>
+    <div class="btn-row">
+      <a class="btn btn-dark" href="{{ wa }}">{{ m.icon("whatsapp", 22) | safe }} Message us on WhatsApp</a>
+      <a class="btn btn-white" href="/contact/#forms">{{ "Send an enquiry" if group == "org" else "Request a call back" }}</a>
+    </div>
+  </div>
+</section>
+{% endif %}
