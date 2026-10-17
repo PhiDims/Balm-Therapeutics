@@ -1,6 +1,6 @@
 # Balm Therapeutic Services website
 
-The website for balmtherapeutics.com.ng. It's built with Eleventy, hosted free on Cloudflare Pages, and edited at `/admin`, the same setup as psychphidims.com.
+The website for balmtherapeutics.com.ng. It's built with Eleventy, hosted free on Cloudflare Workers, and edited at `/admin`, the same setup as psychphidims.com.
 
 ## What's in this folder
 
@@ -17,40 +17,45 @@ The website for balmtherapeutics.com.ng. It's built with Eleventy, hosted free o
 | `src/_includes/` | Page layouts and shared parts (header, footer, forms). |
 | `src/assets/` | Styles, script, logo, images and the company profile PDF. |
 | `src/admin/` | The `/admin` editor (Decap CMS). |
-| `functions/api/` | GitHub sign-in for the editor, run by Cloudflare. |
+| `worker/index.js` | Serves the site and handles GitHub sign-in for the editor. |
+| `wrangler.jsonc` | Cloudflare Worker settings. |
 
 ## Going live: one-time setup
 
 Do these in order. Steps 1 to 4 take about 30 minutes; the domain move in step 6 can take up to a day to settle.
 
 **1. Put the code on GitHub**
-Create a private repository, for example `balm-site`, and upload this folder. (Done: the code is in PhiDims/Balm-Therapeutics and `src/admin/config.yml` points to it.)
+Done: the code is in PhiDims/Balm-Therapeutics, and `src/admin/config.yml` points to it.
 
-**2. Create the Cloudflare Pages project**
-Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git → choose the repository.
+**2. Cloudflare Worker (done)**
+The site is live at https://balm-therapeutics.phidims.workers.dev. In the Worker's Settings → Build, check that:
 - Build command: `npm run build`
-- Build output directory: `_site`
-- Environment variable: `NODE_VERSION` = `22`
+- Deploy command: `npx wrangler deploy`
 
-Cloudflare gives you a preview address ending in `.pages.dev`. Check everything there first.
+Every change pushed to GitHub, including saves from /admin, rebuilds and publishes the site in about a minute.
 
 **3. Turn on the /admin editor**
 On GitHub: Settings → Developer settings → OAuth Apps → New OAuth App.
+- Application name: `Balm website editor`
 - Homepage URL: `https://balmtherapeutics.com.ng`
 - Authorization callback URL: `https://balmtherapeutics.com.ng/api/callback`
 
-Copy the Client ID and create a Client Secret. In Cloudflare Pages → Settings → Environment variables, add `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`, then redeploy.
+Until the domain moves, use `https://balm-therapeutics.phidims.workers.dev/api/callback` as the callback URL and change it later.
+
+Copy the Client ID and generate a Client Secret. In Cloudflare → Workers & Pages → balm-therapeutics → Settings → Variables and Secrets, add:
+- `GITHUB_CLIENT_ID` (type Text)
+- `GITHUB_CLIENT_SECRET` (type Secret)
 
 Anyone who should edit the site needs a free GitHub account and must be added as a collaborator on the repository.
 
 **4. Make the forms send email**
-Get a free access key at web3forms.com using `hello@balmtherapeutics.com.ng` (or balmtherapeutics@gmail.com). Put it in `src/_data/site.json` as `web3formsKey`, or in /admin → Site settings → Contact details.
+Get a free access key at web3forms.com using `hello@balmtherapeutics.com.ng` (or balmtherapeutics@gmail.com). Put it in /admin → Site settings → Contact details, or in `src/_data/site.json` as `web3formsKey`.
 
-**5. Rebuild every morning (for events)**
-Cloudflare Pages → Settings → Builds → Deploy hooks → add one and copy the URL. On GitHub, add it as a repository secret named `CF_DEPLOY_HOOK`. The included workflow then rebuilds the site at 5am daily, so yesterday's events move to the archive.
+**5. Events**
+Past events disappear from the upcoming lists on their own. They move into the "Past events" archive the next time the site rebuilds, which happens whenever anyone saves a change.
 
 **6. Move the domain**
-Add `balmtherapeutics.com.ng` to Cloudflare and change the nameservers at your .ng registrar to the two Cloudflare gives you. Then in the Pages project → Custom domains, add `balmtherapeutics.com.ng` and `www.balmtherapeutics.com.ng`. Keep the Google Site unpublished, not deleted, for a month as a backup.
+Add `balmtherapeutics.com.ng` to Cloudflare and change the nameservers at your .ng registrar to the two Cloudflare gives you. Then in the Worker → Settings → Domains & Routes, add `balmtherapeutics.com.ng` and `www.balmtherapeutics.com.ng` as custom domains. Then update the GitHub OAuth app's callback URL to `https://balmtherapeutics.com.ng/api/callback`, and in `src/admin/config.yml` change `base_url` to `https://balmtherapeutics.com.ng`. Keep the Google Site unpublished, not deleted, for a month as a backup.
 
 If you buy `balmtherapeutics.com`, add it to Cloudflare too and create a redirect rule to `https://balmtherapeutics.com.ng`.
 

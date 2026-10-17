@@ -1,5 +1,5 @@
 {# Expects `e` (an event) and optional `isPast` #}
-<article class="event{% if isPast %} past{% endif %}">
+<article class="event{% if isPast %} past{% endif %}"{% if not isPast %} data-ends="{{ (e.data.end or e.data.start) | isoDate }}"{% endif %}>
   <div class="date"><b>{{ e.data.start | day }}</b><span>{{ e.data.start | mon }}</span></div>
   <div class="info">
     <h3 class="title">{{ e.data.title }}</h3>

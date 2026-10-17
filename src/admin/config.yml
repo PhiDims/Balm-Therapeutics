@@ -6,7 +6,7 @@ backend:
   name: github
   repo: PhiDims/Balm-Therapeutics
   branch: main
-  base_url: https://balmtherapeutics.com.ng
+  base_url: https://balm-therapeutics.phidims.workers.dev   # change to https://balmtherapeutics.com.ng after the domain moves
   auth_endpoint: api/auth
   commit_messages:
     create: "Add {{collection}}: {{slug}}"

@@ -78,6 +78,14 @@
     if (location.hash === "#organisations") { var org = list.querySelector('[aria-controls="panel-org"]'); if (org) select(org); }
   });
 
+
+  // Hide upcoming events whose date has passed, in case the site hasn't been rebuilt since.
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  document.querySelectorAll(".event[data-ends]").forEach(function (ev) {
+    var end = new Date(ev.getAttribute("data-ends") + "T23:59:59");
+    if (end < today) ev.hidden = true;
+  });
+
   // Forms: send to Web3Forms and show a friendly message without leaving the page
   document.querySelectorAll("form[data-web3forms]").forEach(function (form) {
     var status = form.querySelector(".status");
